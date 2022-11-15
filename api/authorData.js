@@ -3,7 +3,18 @@
 // const endpoint = client.databaseURL;
 
 // FIXME:  GET ALL AUTHORS
-const getAuthors = () => {};
+
+const getAuthors = () => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/authors.json`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/jason',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
 
 // FIXME: CREATE AUTHOR
 const createAuthor = () => {};

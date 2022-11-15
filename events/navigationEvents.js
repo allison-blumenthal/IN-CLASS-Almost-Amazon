@@ -1,4 +1,6 @@
+import { getBooks } from '../api/bookData';
 import { signOut } from '../utils/auth';
+import { showBooks } from '../pages/books';
 
 // navigation events
 const navigationEvents = () => {
@@ -13,19 +15,7 @@ const navigationEvents = () => {
 
   // TODO: ALL BOOKS
   document.querySelector('#all-books').addEventListener('click', () => {
-    console.warn('CLICKED ALL BOOKS');
-  });
-
-  const getBooks = () => new Promise((resolve, reject) => {
-    fetch(`${endpoint}/books.json`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/jason',
-      },
-    })
-      .then((response) => response.json(Object.values)())
-      .then((data) => resolve(data))
-      .catch(reject);
+    getBooks().then(showBooks);
   });
 
   // FIXME: STUDENTS Create an event listener for the Authors
