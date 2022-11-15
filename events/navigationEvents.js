@@ -16,6 +16,18 @@ const navigationEvents = () => {
     console.warn('CLICKED ALL BOOKS');
   });
 
+  const getBooks = () => new Promise((resolve, reject) => {
+    fetch(`${endpoint}/books.json`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/jason',
+      },
+    })
+      .then((response) => response.json(Object.values)())
+      .then((data) => resolve(data))
+      .catch(reject);
+  });
+
   // FIXME: STUDENTS Create an event listener for the Authors
   // 1. When a user clicks the authors link, make a call to firebase to get all authors
   // 2. Convert the response to an array because that is what the makeAuthors function is expecting
