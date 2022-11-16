@@ -44,8 +44,18 @@ const createAuthor = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// FIXME: GET SINGLE AUTHOR
-const getSingleAuthor = () => {};
+// Done: GET SINGLE AUTHOR
+const getSingleAuthor = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/authors/${firebaseKey}.json`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
 
 // Done: DELETE AUTHOR
 
