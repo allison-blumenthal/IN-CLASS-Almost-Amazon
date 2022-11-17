@@ -57,7 +57,8 @@ const formEvents = () => {
       const payload = {
         first_name: document.querySelector('#first_name').value,
         last_name: document.querySelector('#last_name').value,
-        email: document.querySelector('#email').value
+        email: document.querySelector('#email').value,
+        favorite: document.querySelector('#favorite').checked
       };
 
       console.warn(payload);
@@ -80,6 +81,7 @@ const formEvents = () => {
         first_name: document.querySelector('#first_name').value,
         last_name: document.querySelector('#last_name').value,
         email: document.querySelector('#email').value,
+        favorite: document.querySelector('#favorite').checked,
         firebaseKey,
       };
 
