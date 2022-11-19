@@ -67,6 +67,10 @@ const domEvents = () => {
 
       getSingleAuthor(firebaseKey).then((authorObj) => addAuthorForm(authorObj));
     }
+    // CLICK EVENT FOR SHOWING BOOKS BY ONE AUTHOR
+    if (e.target.id.includes('view-author-btn')) {
+      console.warn('VIEW AUTHOR', e.target.id);
+    }
   });
 };
 
