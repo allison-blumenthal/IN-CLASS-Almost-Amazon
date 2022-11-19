@@ -1,6 +1,6 @@
-import { deleteSingleAuthor, getAuthors, getSingleAuthor } from '../api/authorData';
+import { getAuthors, getSingleAuthor } from '../api/authorData';
 import { deleteBook, getBooks, getSingleBook } from '../api/bookData';
-import { getBookDetails, getAuthorDetails, deleteAuthorBooksRelationship } from '../api/mergedData';
+import { getBookDetails, getAuthorBooks, deleteAuthorBooksRelationship } from '../api/mergedData';
 import { showAuthors } from '../pages/authors';
 import { showBooks } from '../pages/books';
 import addBookForm from '../components/forms/addBookForm';
@@ -53,14 +53,10 @@ const domEvents = () => {
         console.warn('CLICKED DELETE AUTHOR', e.target.id);
         const [, firebaseKey] = e.target.id.split('--');
 
-        deleteSingleAuthor(firebaseKey).then(() => {
+        deleteAuthorBooksRelationship(firebaseKey).then(() => {
           getAuthors().then(showAuthors);
         });
       }
-  
-
-      
-      });
     }
 
     // Done: ADD CLICK EVENT FOR SHOWING FORM FOR ADDING AN AUTHOR
@@ -81,7 +77,7 @@ const domEvents = () => {
       console.warn('VIEW AUTHOR', e.target.id);
       console.warn(e.target.id.split('--'));
       const [, firebaseKey] = e.target.id.split('--');
-      getAuthorDetails(firebaseKey).then(viewAuthor);
+      getAuthorBooks(firebaseKey).then(viewAuthor);
     }
   });
 };
