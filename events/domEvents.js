@@ -1,6 +1,6 @@
 import { deleteSingleAuthor, getAuthors, getSingleAuthor } from '../api/authorData';
 import { deleteBook, getBooks, getSingleBook } from '../api/bookData';
-import { getBookDetails, getAuthorDetails } from '../api/mergedData';
+import { getBookDetails, getAuthorDetails, deleteAuthorBooksRelationship } from '../api/mergedData';
 import { showAuthors } from '../pages/authors';
 import { showBooks } from '../pages/books';
 import addBookForm from '../components/forms/addBookForm';
@@ -57,6 +57,10 @@ const domEvents = () => {
           getAuthors().then(showAuthors);
         });
       }
+  
+
+      
+      });
     }
 
     // Done: ADD CLICK EVENT FOR SHOWING FORM FOR ADDING AN AUTHOR

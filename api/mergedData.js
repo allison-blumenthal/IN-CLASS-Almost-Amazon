@@ -1,5 +1,5 @@
-import { getAuthorBooks, getSingleAuthor } from './authorData';
-import { getSingleBook } from './bookData';
+import { deleteSingleAuthor, getAuthorBooks, getSingleAuthor } from './authorData';
+import { deleteBook, getSingleBook } from './bookData';
 
 // API CALLS FOR MERGED DATA
 
@@ -17,4 +17,13 @@ const getAuthorDetails = (firebaseKey) => new Promise((resolve, reject) => {
   }).catch(reject);
 });
 
-export { getBookDetails, getAuthorDetails };
+const deleteAuthorBooksRelationship = (firebaseKey) => new Promise((resolve, reject) => {
+  getbooksByAuthor(firebaseKey).then(booksArray) => {
+    const deleteBookPromises = booksArray.map((book) => deleteBook(book.firebaseKey));
+    Promise.all(deleteBookPromises).then(() => {
+      deleteSingl
+    })
+     .catch(reject);
+})
+
+export { getBookDetails, getAuthorDetails, deleteAuthorBooksRelationship };
