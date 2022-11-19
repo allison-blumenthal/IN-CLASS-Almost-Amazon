@@ -1,7 +1,7 @@
-import { getSingleAuthor } from './authorData';
+import { getAuthorBooks, getSingleAuthor } from './authorData';
 import { getSingleBook } from './bookData';
 
-// API CALLS FOR BOOKS
+// API CALLS FOR MERGED DATA
 
 const getBookDetails = (firebaseKey) => new Promise((resolve, reject) => {
   getSingleBook(firebaseKey).then((bookObject) => {
@@ -10,4 +10,11 @@ const getBookDetails = (firebaseKey) => new Promise((resolve, reject) => {
   }).catch(reject);
 });
 
-export default getBookDetails;
+const getAuthorDetails = (firebaseKey) => new Promise((resolve, reject) => {
+  getSingleAuthor(firebaseKey).then((authorObj) => {
+    getAuthorBooks(authorObj.author_id)
+      .then((booksObj) => resolve({ ...authorObj, booksObj }));
+  }).catch(reject);
+});
+
+export { getBookDetails, getAuthorDetails };
