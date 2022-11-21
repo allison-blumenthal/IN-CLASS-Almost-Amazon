@@ -1,11 +1,12 @@
-import { deleteSingleAuthor, getAuthors, getSingleAuthor } from '../api/authorData';
+import { getAuthors, getSingleAuthor } from '../api/authorData';
 import { deleteBook, getBooks, getSingleBook } from '../api/bookData';
-import getBookDetails from '../api/mergedData';
+import { getBookDetails, getAuthorBooks, deleteAuthorBooksRelationship } from '../api/mergedData';
 import { showAuthors } from '../pages/authors';
 import { showBooks } from '../pages/books';
 import addBookForm from '../components/forms/addBookForm';
 import addAuthorForm from '../components/forms/addAuthorForm';
 import viewBook from '../pages/viewBook';
+import viewAuthor from '../pages/viewAuthor';
 
 const domEvents = () => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
@@ -37,7 +38,7 @@ const domEvents = () => {
       getSingleBook(firebaseKey).then((bookObj) => addBookForm(bookObj));
     }
 
-    // TODO: CLICK EVENT FOR VIEW BOOK DETAILS
+    // Done: CLICK EVENT FOR VIEW BOOK DETAILS
     if (e.target.id.includes('view-book-btn')) {
       console.warn('VIEW BOOK', e.target.id);
       console.warn(e.target.id.split('--'));
@@ -52,7 +53,7 @@ const domEvents = () => {
         console.warn('CLICKED DELETE AUTHOR', e.target.id);
         const [, firebaseKey] = e.target.id.split('--');
 
-        deleteSingleAuthor(firebaseKey).then(() => {
+        deleteAuthorBooksRelationship(firebaseKey).then(() => {
           getAuthors().then(showAuthors);
         });
       }
@@ -71,9 +72,12 @@ const domEvents = () => {
 
       getSingleAuthor(firebaseKey).then((authorObj) => addAuthorForm(authorObj));
     }
-    // CLICK EVENT FOR SHOWING BOOKS BY ONE AUTHOR
+    // TO-DO: CLICK EVENT FOR SINGLE AUTHOR DETAILS AND BOOKS
     if (e.target.id.includes('view-author-btn')) {
       console.warn('VIEW AUTHOR', e.target.id);
+      console.warn(e.target.id.split('--'));
+      const [, firebaseKey] = e.target.id.split('--');
+      getAuthorBooks(firebaseKey).then(viewAuthor);
     }
   });
 };
