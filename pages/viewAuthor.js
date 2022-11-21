@@ -4,19 +4,21 @@ import renderToDOM from '../utils/renderToDom';
 const viewAuthor = (obj) => {
   clearDom();
 
-  let domString = `<div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">${obj.first_name} ${obj.last_name}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">${obj.email}</h6>
-        <hr>
-        <p class="card-text bold">${obj.favorite ? '<span class="badge text-bg-warning">Favorite</span>' : ''}</p>
-       <i class="fas fa-edit btn btn-info" id="update-author--${obj.firebaseKey}"></i>
-        <i class="btn btn-danger fas fa-trash-alt" id="delete-author-btn--${obj.firebaseKey}"></i>
-      </div>
-    </div>`;
+  let domString = `
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h2 class="card-title">${obj.first_name} ${obj.last_name}</h2>
+          <h6>${obj.favorite ? '<span class="badge text-bg-warning">Favorite</span>' : ''}</h6>
+          <a href="mailto:${obj.email}">${obj.email}</a>
+          <i class="fas fa-edit btn btn-info" id="update-author--${obj.firebaseKey}"></i>
+          <i class="btn btn-danger fas fa-trash-alt" id="delete-author-btn--${obj.firebaseKey}"></i>
+        </div>
+      </div>`;
 
   obj.authorBooksArr.map((book) => {
     domString += `
+    <div class="mt-5 d-flex flex-wrap">
+      <div class="d-flex flex-column">
         <div class="card">
           <img class="card-img-top" src=${book.image} alt=${book.title} style="height: 400px;">
           <div class="card-body" style="height: 180px;">
@@ -27,7 +29,9 @@ const viewAuthor = (obj) => {
               <i id="edit-book-btn--${book.firebaseKey}" class="fas fa-edit btn btn-info"></i>
               <i id="delete-book-btn--${book.firebaseKey}" class="btn btn-danger fas fa-trash-alt"></i>
           </div>
-        </div>`;
+        </div>
+      </div>
+    </div>`;
     return renderToDOM('#view', domString);
   });
 };
