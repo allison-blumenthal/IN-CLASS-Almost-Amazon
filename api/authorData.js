@@ -24,15 +24,18 @@ const getAuthors = (uid) => new Promise((resolve, reject) => {
 
 // GET FAVORITE AUTHORS
 
-const getFavAuthors = () => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/authors.json?orderBy="favorite"&equalTo=true`, {
+const getFavAuthors = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/authors.json?orderBy="uid"&equalTo="${uid}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
   })
     .then((response) => response.json())
-    .then((data) => resolve(Object.values(data)))
+    .then((data) => {
+      const favorites = Object.values(data).filter((obj) => obj.favorite);
+      resolve(favorites);
+    })
     .catch(reject);
 });
 

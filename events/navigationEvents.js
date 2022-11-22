@@ -33,7 +33,7 @@ const navigationEvents = (user) => {
 
   // FAVORITE AUTHORS
   document.querySelector('#fav-authors').addEventListener('click', () => {
-    getFavAuthors().then(showAuthors);
+    getFavAuthors(user.uid).then(showAuthors);
   });
 
   // STRETCH: SEARCH
