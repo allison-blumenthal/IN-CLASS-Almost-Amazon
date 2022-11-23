@@ -8,7 +8,7 @@ import addAuthorForm from '../components/forms/addAuthorForm';
 import viewBook from '../pages/viewBook';
 import viewAuthor from '../pages/viewAuthor';
 
-const domEvents = () => {
+const domEvents = (user) => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
     // Done: CLICK EVENT FOR DELETING A BOOK
     if (e.target.id.includes('delete-book')) {
@@ -26,7 +26,7 @@ const domEvents = () => {
     // Done: CLICK EVENT FOR SHOWING FORM FOR ADDING A BOOK
     if (e.target.id.includes('add-book-btn')) {
       console.warn('ADD BOOK');
-      addBookForm();
+      addBookForm({}, user);
     }
 
     // Done: CLICK EVENT EDITING/UPDATING A BOOK
