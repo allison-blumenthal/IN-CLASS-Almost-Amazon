@@ -35,7 +35,7 @@ const domEvents = (user) => {
       console.warn(e.target.id.split('--'));
       const [, firebaseKey] = e.target.id.split('--');
 
-      getSingleBook(firebaseKey).then((bookObj) => addBookForm(bookObj));
+      getSingleBook(firebaseKey).then((bookObj, user.uid) => addBookForm(bookObj, user.uid));
     }
 
     // Done: CLICK EVENT FOR VIEW BOOK DETAILS
@@ -62,7 +62,7 @@ const domEvents = (user) => {
     // Done: ADD CLICK EVENT FOR SHOWING FORM FOR ADDING AN AUTHOR
     if (e.target.id.includes('add-author-btn')) {
       console.warn('ADD AUTHOR');
-      addAuthorForm();
+      addAuthorForm({}, user);
     }
     // Done: ADD CLICK EVENT FOR EDITING/UPDATING AN AUTHOR
     if (e.target.id.includes('update-author')) {
