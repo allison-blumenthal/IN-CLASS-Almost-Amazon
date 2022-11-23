@@ -35,7 +35,7 @@ const domEvents = (user) => {
       console.warn(e.target.id.split('--'));
       const [, firebaseKey] = e.target.id.split('--');
 
-      getSingleBook(firebaseKey).then((bookObj, user.uid) => addBookForm(bookObj, user.uid));
+      getSingleBook(firebaseKey).then((bookObj) => addBookForm(bookObj, user.uid));
     }
 
     // Done: CLICK EVENT FOR VIEW BOOK DETAILS
