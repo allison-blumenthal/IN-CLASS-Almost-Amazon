@@ -5,7 +5,7 @@ import { getAuthors, getFavAuthors } from '../api/authorData';
 import { showAuthors } from '../pages/authors';
 
 // navigation events
-const navigationEvents = () => {
+const navigationEvents = (user) => {
   // LOGOUT BUTTON
   document.querySelector('#logout-button')
     .addEventListener('click', signOut);
@@ -13,12 +13,12 @@ const navigationEvents = () => {
   // Done: BOOKS ON SALE
   document.querySelector('#sale-books').addEventListener('click', () => {
     console.warn('CLICKED SALE BOOKS');
-    booksOnSale().then(showBooks);
+    booksOnSale(user.uid).then(showBooks);
   });
 
   // Done: ALL BOOKS
   document.querySelector('#all-books').addEventListener('click', () => {
-    getBooks().then(showBooks);
+    getBooks(user.uid).then(showBooks);
   });
 
   //  STUDENTS Create an event listener for the Authors
@@ -28,12 +28,12 @@ const navigationEvents = () => {
 
   // Done: ALL AUTHORS
   document.querySelector('#authors').addEventListener('click', () => {
-    getAuthors().then(showAuthors);
+    getAuthors(user.uid).then(showAuthors);
   });
 
   // FAVORITE AUTHORS
   document.querySelector('#fav-authors').addEventListener('click', () => {
-    getFavAuthors().then(showAuthors);
+    getFavAuthors(user.uid).then(showAuthors);
   });
 
   // STRETCH: SEARCH
