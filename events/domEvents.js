@@ -26,7 +26,7 @@ const domEvents = (user) => {
     // Done: CLICK EVENT FOR SHOWING FORM FOR ADDING A BOOK
     if (e.target.id.includes('add-book-btn')) {
       console.warn('ADD BOOK');
-      addBookForm({}, user);
+      addBookForm({}, user.uid);
     }
 
     // Done: CLICK EVENT EDITING/UPDATING A BOOK
